@@ -8,11 +8,21 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+import { ThemeProvider } from "styled-components"
+import styled from "styled-components"
+import * as theme from "@styles/theme"
 
 import Header from "./header"
-import "./layout.css"
+import Footer from "@components/footer"
+import "./layout.scss"
 
-const Layout = ({ children }) => {
+const Body = styled.div`
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`
+
+const Layout = ({ children, isNormalPage }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,23 +34,18 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <ThemeProvider theme={theme}>
+      <Body>
+        <div style={{ flexGrow: 1 }}>
+          <Header
+            siteTitle={data.site.siteMetadata.title}
+            isNormalPage={isNormalPage ? isNormalPage : null}
+          />
+          <main style={{ backgroundColor: "#fff" }}>{children}</main>
+        </div>
+        <Footer />
+      </Body>
+    </ThemeProvider>
   )
 }
 
