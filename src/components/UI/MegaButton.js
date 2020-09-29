@@ -24,6 +24,7 @@ const Button = styled(Link)`
   font-size: 16px;
   padding: 17px 45px;
   margin-right: 20px;
+  margin-bottom: 20px;
   display: inline-block;
   transition: all 300ms;
   text-decoration: none;

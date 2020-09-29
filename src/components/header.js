@@ -160,8 +160,8 @@ const Wrapper = props => {
         </Grid>
         <Sidebar open={sidebarIsOpen} />
       </header>
-
       {header}
+      <Bg />
     </HeaderContainer>
   )
 }
@@ -208,11 +208,14 @@ const Header = styled.div`
   span {
     color: ${props => props.theme.colors.accent};
   }
+  margin-top: 30px;
 
-  @media (min-width: 1080px) {
-    strong {
-      color: ${props => props.theme.colors.accent};
-    }
+  strong {
+    color: ${props => props.theme.colors.accent};
+  }
+
+  @media ${props => props.theme.device.mobileL} {
+    margin-top: 0;
   }
 
   height: 70%;
@@ -231,11 +234,25 @@ const Menu = styled.div`
   }
 `
 
+const Bg = styled.div`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -11;
+  background-color: #fff;
+  top: 0;
+`
+
 const RocketImg = styled.div`
   position: absolute;
   z-index: 10;
   left: 56%;
   top: 260px;
+  display: none;
+
+  @media ${props => props.theme.device.tablet} {
+    display: block;
+  }
 `
 
 const Backdrop = styled.div`
