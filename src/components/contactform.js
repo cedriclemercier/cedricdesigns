@@ -1,6 +1,7 @@
 import React from "react"
 import { useFormik } from "formik"
 import styled from "styled-components"
+import { config } from "react-transition-group"
 
 const validate = values => {
   const errors = {}
@@ -38,6 +39,16 @@ const ContactForm = props => {
       service: "",
     },
     validate,
+    onSubmit: values => {
+      // alert(JSON.stringify(values, null, 2))
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: JSON.stringify(values, null, 2),
+      })
+        .then(() => console.log("Submitting.."))
+        .catch(error => alert(error))
+    },
   })
   return (
     <FormStyle>
