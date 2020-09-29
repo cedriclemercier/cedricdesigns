@@ -16,9 +16,6 @@ import MegaButton from "@components/UI/MegaButton"
 const Wrapper = props => {
   const [sidebarIsOpen, setSidebarIsOpen] = useState(false)
 
-  console.log("Header props...")
-  console.log(props)
-
   const data = useStaticQuery(graphql`
     query {
       background: file(relativePath: { eq: "bg-01.png" }) {

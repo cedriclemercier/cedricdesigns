@@ -10,8 +10,7 @@ import Layout from "@components/layout"
 import SEO from "@components/seo"
 import DefaultGrid from "@components/Layout/Grid"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { MARKS, BLOCKS, INLINES } from "@contentful/rich-text-types"
-import ProgressBar from "@components/UI/ProgressBar"
+import { MARKS, BLOCKS } from "@contentful/rich-text-types"
 
 export const query = graphql`
   query($slug: String!) {
