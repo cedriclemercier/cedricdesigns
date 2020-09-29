@@ -200,7 +200,7 @@ const IndexPage = () => {
               Have a question or request? Leave a message and I'll get back to
               you.
             </p>
-            <ContactForm />
+            <ContactForm name="Homepage ContactForm" />
           </Box>
         </DefaultGrid>
       </Section>

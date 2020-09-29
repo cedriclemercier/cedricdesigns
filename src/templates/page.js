@@ -3,7 +3,7 @@ import React from "react"
 import Layout from "@components/layout"
 import SEO from "@components/seo"
 import Image from "gatsby-image"
-import { graphql, } from "gatsby"
+import { graphql } from "gatsby"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
 import { Box } from "react-raster"
@@ -218,7 +218,9 @@ const Page = props => {
           <DefaultGrid>
             <Box cols={[12, 12, 3, 3]}></Box>
             <Box cols={[12, 12, 9, 6]}>
-              <ContactForm />
+              <ContactForm
+                name={`Contact Form ${props.data.contentfulPage.title}`}
+              />
             </Box>
           </DefaultGrid>
         )}

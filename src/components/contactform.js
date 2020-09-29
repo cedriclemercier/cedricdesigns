@@ -29,7 +29,7 @@ const validate = values => {
   return errors
 }
 
-const ContactForm = () => {
+const ContactForm = props => {
   const formik = useFormik({
     initialValues: {
       firstName: "",
@@ -41,7 +41,14 @@ const ContactForm = () => {
   })
   return (
     <FormStyle>
-      <form onSubmit={formik.handleSubmit} data-netlify="true">
+      <form
+        name={props.name}
+        onSubmit={formik.handleSubmit}
+        data-netlify="true"
+        method="post"
+        data-netlify-honeypot="bot-field"
+      >
+        <input type="hidden" name={props.name} value="contact" />
         <label htmlFor="service">Service type</label>
         <select
           id="service"
