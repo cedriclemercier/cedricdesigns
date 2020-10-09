@@ -55,7 +55,7 @@ const ContactForm = props => {
           }
         }}
       >
-        <Form name={props.name} data-netlify={true}>
+        <Form name={props.name} data-netlify="true">
           <input type="hidden" name={props.name} value={props.name} />
           <label htmlFor="name">Name: </label>
           <Field name="name" />
