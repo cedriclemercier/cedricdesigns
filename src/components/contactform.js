@@ -1,126 +1,93 @@
 import React from "react"
-import { useFormik } from "formik"
+import { Formik, Form, Field, ErrorMessage } from "formik"
 import styled from "styled-components"
-import { config } from "react-transition-group"
-
-const validate = values => {
-  const errors = {}
-  if (!values.firstName) {
-    errors.firstName = "Required"
-  } else if (values.firstName.length > 15) {
-    errors.firstName = "Must be 15 characters or less"
-  }
-
-  if (!values.service) {
-    errors.service = "Please choose a service"
-  }
-
-  if (!values.lastName) {
-    errors.lastName = "Required"
-  } else if (values.lastName.length > 20) {
-    errors.lastName = "Must be 20 characters or less"
-  }
-
-  if (!values.email) {
-    errors.email = "Required"
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address"
-  }
-
-  return errors
-}
 
 const ContactForm = props => {
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      service: "",
-    },
-    validate,
-    onSubmit: values => {
-      // alert(JSON.stringify(values, null, 2))
-      fetch("/", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: JSON.stringify(values, null, 2),
-      })
-        .then(() => console.log("Submitting.."))
-        .catch(error => alert(error))
-    },
-  })
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&")
+  }
+
   return (
     <FormStyle>
-      <form
-        name={props.name}
-        onSubmit={formik.handleSubmit}
-        data-netlify="true"
-        method="post"
-        data-netlify-honeypot="bot-field"
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          phone: "",
+          service: "",
+          message: "",
+        }}
+        onSubmit={(values, actions) => {
+          fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: encode({ "form-name": "contact-demo", ...values }),
+          })
+            .then(() => {
+              alert("Thank you for your message! We will be in touch.")
+              actions.resetForm()
+            })
+            .catch(() => {
+              alert("There was a problem. Please try again later.")
+            })
+            .finally(() => actions.setSubmitting(false))
+        }}
+        validate={values => {
+          const errors = {}
+          if (!values.name) {
+            errors.name = "Required"
+          } else if (values.name.length > 15) {
+            errors.name = "Must be 15 characters or less"
+          }
+
+          if (!values.service) {
+            errors.service = "Please choose a service"
+          }
+
+          if (!values.email) {
+            errors.email = "Required"
+          } else if (
+            !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+          ) {
+            errors.email = "Invalid email address"
+          }
+        }}
       >
-        <input type="hidden" name={props.name} value="contact" />
-        <label htmlFor="service">Service type</label>
-        <select
-          id="service"
-          name="service"
-          required
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.service}
-        >
-          <option value="" disabled selected hidden>
-            Choose a service...
-          </option>
-          <option>Web Development</option>
-          <option>Web Design</option>
-          <option>ECommerce Web Development</option>
-          <option>Mobile App Design</option>
-          <option>Mobile App Development</option>
-          <option>Search Engine Optimisation</option>
-          <option>Branding</option>
-          <option>Logo Design</option>
-          <option>Video animation</option>
-          <option>Other</option>
-        </select>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          id="firstName"
-          name="firstName"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.firstName}
-        />
-        {formik.touched.firstName && formik.errors.firstName ? (
-          <div>{formik.errors.firstName}</div>
-        ) : null}
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          id="lastName"
-          name="lastName"
-          type="text"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.lastName}
-        />
-        {formik.touched.lastName && formik.errors.lastName ? (
-          <div>{formik.errors.lastName}</div>
-        ) : null}
-        <label htmlFor="email">Email Address</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          onBlur={formik.handleBlur}
-          value={formik.values.email}
-        />
-        {formik.touched.email && formik.errors.email ? (
-          <div>{formik.errors.email}</div>
-        ) : null}
-        <button type="submit">Submit</button>
-      </form>
+        <Form name={props.name} data-netlify={true}>
+          <label htmlFor="name">Name: </label>
+          <Field name="name" />
+          <ErrorMessage name="name" />
+
+          <label htmlFor="email">Email: </label>
+          <Field name="email" />
+          <ErrorMessage name="email" />
+
+          <label htmlFor="service">Service: </label>
+          <Field as="select" name="service">
+            <option value="" disabled selected hidden>
+              Choose a service...
+            </option>
+            <option>Web Development</option>
+            <option>Web Design</option>
+            <option>ECommerce Web Development</option>
+            <option>Mobile App Design</option>
+            <option>Mobile App Development</option>
+            <option>Search Engine Optimisation</option>
+            <option>Branding</option>
+            <option>Logo Design</option>
+            <option>Video animation</option>
+            <option>Other</option>
+          </Field>
+          <ErrorMessage name="service" />
+
+          <label htmlFor="message">Message: </label>
+          <Field name="message" component="textarea" />
+
+          <button type="submit">Send</button>
+        </Form>
+      </Formik>
     </FormStyle>
   )
 }
