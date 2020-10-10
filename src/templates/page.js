@@ -219,7 +219,7 @@ const Page = props => {
             <Box cols={[12, 12, 3, 3]}></Box>
             <Box cols={[12, 12, 9, 6]}>
               <ContactForm
-                name={`${props.data.contentfulPage.title} | Contact Form`}
+                name={`${props.data.contentfulPage.title} - Contact Form`}
               />
             </Box>
           </DefaultGrid>

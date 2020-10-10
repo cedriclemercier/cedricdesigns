@@ -16,7 +16,7 @@ const ContactForm = props => {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "contact", ...values }),
+      body: encode({ "form-name": props.name, ...values }),
     })
       .then(() => alert("Thank you for your message. It has been sent!"))
       .catch(error => alert(error))
