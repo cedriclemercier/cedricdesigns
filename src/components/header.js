@@ -108,7 +108,7 @@ const Wrapper = props => {
     header = (
       <>
         <Header>
-          <Grid alignY="center" style={{ height: "100%" }}>
+          <Grid alignY="center" style={`height: 100%`}>
             <Box cols={[12, 12, 8, 5]}>
               {documentToReactComponents(data.homepage.cta.json, ctaOptions)}
             </Box>

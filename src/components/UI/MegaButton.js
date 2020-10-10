@@ -4,7 +4,7 @@ import styled from "styled-components"
 
 const MegaButton = props => {
   return (
-    <Button mode={props.mode} to={props.to}>
+    <Button mode={props.mode ? props.mode : "fill"} to={props.to}>
       {props.children}
     </Button>
   )

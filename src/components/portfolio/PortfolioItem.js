@@ -88,7 +88,7 @@ const Wrapper = props => {
             <p>{props.description}</p>
             <h4>Project Components</h4>
             {props.skills.map(el => (
-              <ProjectComponents>
+              <ProjectComponents key={el.key}>
                 <h5>{el.key}</h5>
                 <ProgressBar percentage={el.value} />
               </ProjectComponents>
@@ -98,7 +98,7 @@ const Wrapper = props => {
             <ProjectComponents>
               <div style={{ display: "inline-block" }}>
                 {props.colorPalette.map(el => (
-                  <ColorPalette color={el.value} />
+                  <ColorPalette key={el.value} color={el.value} />
                 ))}
               </div>
             </ProjectComponents>
@@ -106,7 +106,6 @@ const Wrapper = props => {
           </PortfolioDescription>
         </Box>
       </Grid>
-      <Image />
       {props.children}
     </PortfolioItem>
   )

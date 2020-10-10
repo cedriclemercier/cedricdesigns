@@ -9,37 +9,35 @@ const ContactForm = props => {
       .join("&")
   }
 
+  const handleSubmit = values => {
+    const e = encode({ ...values })
+    console.log(e)
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "contact", ...values }),
+    })
+      .then(() => alert("Thank you for your message. It has been sent!"))
+      .catch(error => alert(error))
+  }
+
   return (
     <FormStyle>
       <Formik
         initialValues={{
           name: "",
           email: "",
-          phone: "",
           service: "",
           message: "",
         }}
-        onSubmit={(values, actions) => {
-          fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: encode({ "form-name": "contact-demo", ...values }),
-          })
-            .then(() => {
-              alert("Thank you for your message! We will be in touch.")
-              actions.resetForm()
-            })
-            .catch(() => {
-              alert("There was a problem. Please try again later.")
-            })
-            .finally(() => actions.setSubmitting(false))
-        }}
+        onSubmit={handleSubmit}
         validate={values => {
           const errors = {}
           if (!values.name) {
-            errors.name = "Required"
-          } else if (values.name.length > 15) {
-            errors.name = "Must be 15 characters or less"
+            errors.name = "This field is required"
+          } else if (values.name.length > 25) {
+            errors.name = "Must be 25 characters or less"
           }
 
           if (!values.service) {
@@ -47,47 +45,51 @@ const ContactForm = props => {
           }
 
           if (!values.email) {
-            errors.email = "Required"
+            errors.email = "This field is required"
           } else if (
             !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
           ) {
             errors.email = "Invalid email address"
           }
+
+          return errors
         }}
       >
-        <Form name={props.name} data-netlify="true">
-          <input type="hidden" name={props.name} value={props.name} />
-          <label htmlFor="name">Name: </label>
-          <Field name="name" />
-          <ErrorMessage name="name" />
+        {({ errors, touched }) => (
+          <Form name={props.name} data-netlify="true">
+            <input type="hidden" name={props.name} value={props.name} />
+            <label htmlFor="name">Name: </label>
+            <Field name="name" />
+            <ErrorMessage component={ErrorBox} name="name" />
 
-          <label htmlFor="email">Email: </label>
-          <Field name="email" />
-          <ErrorMessage name="email" />
+            <label htmlFor="email">Email: </label>
+            <Field type="email" name="email" />
+            <ErrorMessage component={ErrorBox} name="email" />
 
-          <label htmlFor="service">Service: </label>
-          <Field as="select" name="service">
-            <option value="" disabled selected hidden>
-              Choose a service...
-            </option>
-            <option>Web Development</option>
-            <option>Web Design</option>
-            <option>ECommerce Web Development</option>
-            <option>Mobile App Design</option>
-            <option>Mobile App Development</option>
-            <option>Search Engine Optimisation</option>
-            <option>Branding</option>
-            <option>Logo Design</option>
-            <option>Video animation</option>
-            <option>Other</option>
-          </Field>
-          <ErrorMessage name="service" />
+            <label htmlFor="service">Service: </label>
+            <Field as="select" name="service">
+              <option value="" disabled defaultValue hidden>
+                Choose a service...
+              </option>
+              <option>Web Development</option>
+              <option>Web Design</option>
+              <option>ECommerce Web Development</option>
+              <option>Mobile App Design</option>
+              <option>Mobile App Development</option>
+              <option>Search Engine Optimisation</option>
+              <option>Branding</option>
+              <option>Logo Design</option>
+              <option>Video animation</option>
+              <option>Other</option>
+            </Field>
+            <ErrorMessage component={ErrorBox} name="service" />
 
-          <label htmlFor="message">Message: </label>
-          <Field name="message" component="textarea" />
+            <label htmlFor="message">Message: </label>
+            <Field name="message" component="textarea" />
 
-          <button type="submit">Send</button>
-        </Form>
+            <button type="submit">Send</button>
+          </Form>
+        )}
       </Formik>
     </FormStyle>
   )
@@ -123,7 +125,7 @@ const FormStyle = styled.div`
   button[type="submit"] {
     color: #ffffff;
     border-color: transparent;
-    background-color: #ff1734;
+    background-color: ${props => props.theme.colors.primary};
     font-family: "Open Sans", sans-serif;
     text-transform: uppercase;
     font-weight: 700;
@@ -134,6 +136,11 @@ const FormStyle = styled.div`
     padding: 14px 45px;
     width: 100%;
   }
+`
+
+const ErrorBox = styled.div`
+  color: ${props => props.theme.colors.primary};
+  margin-bottom: 1.2rem;
 `
 
 export default ContactForm

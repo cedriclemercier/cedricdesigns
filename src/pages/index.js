@@ -146,7 +146,7 @@ const IndexPage = () => {
         return (
           <>
             <PortfolioItem
-              thumbnailFixed={portfolioPage.node.thumbnail.fixed}
+              // thumbnailFixed={portfolioPage.node.thumbnail.fixed}
               thumbnailFluid={portfolioPage.node.thumbnail.fluid}
               title={portfolioPage.node.title}
               description={portfolioPage.node.description.description}
@@ -161,7 +161,7 @@ const IndexPage = () => {
   }
 
   return (
-    <Layout>
+    <Layout isNormalPage={false}>
       <SEO title="Home" />
 
       <Section color="dark" center>
@@ -200,7 +200,7 @@ const IndexPage = () => {
               Have a question or request? Leave a message and I'll get back to
               you.
             </p>
-            <ContactForm name="Homepage ContactForm" />
+            <ContactForm name="Homepage - Contact Form" />
           </Box>
         </DefaultGrid>
       </Section>
