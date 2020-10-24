@@ -11,7 +11,6 @@ const ContactForm = props => {
 
   const handleSubmit = values => {
     const e = encode({ ...values })
-    console.log(e)
 
     fetch("/", {
       method: "POST",

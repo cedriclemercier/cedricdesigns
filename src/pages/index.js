@@ -18,6 +18,10 @@ const IndexPage = () => {
     query {
       homepage: contentfulHomePage {
         slug
+        title
+        metaDescription {
+          metaDescription
+        }
         cta {
           json
         }
@@ -162,7 +166,10 @@ const IndexPage = () => {
 
   return (
     <Layout isNormalPage={false}>
-      <SEO title="Home" />
+      <SEO
+        title={data.homepage.title}
+        description={data.homepage.metaDescription.metaDescription}
+      />
 
       <Section color="dark" center>
         <DefaultGrid>

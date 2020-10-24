@@ -4,6 +4,7 @@ import { Grid } from "react-raster"
 const Wrapper = props => {
   return (
     <Grid
+      {...props}
       alignX="center"
       breakpoints={[0, 400, 768, 1200, 1440]}
       colspan={12}
@@ -13,7 +14,6 @@ const Wrapper = props => {
       right={["3vw", "3vw", "3vw", "2vw"]}
       top={"2vw"}
       bottom={"2vw"}
-      {...props}
     >
       {props.children}
     </Grid>

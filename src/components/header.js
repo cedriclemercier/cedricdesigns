@@ -86,7 +86,7 @@ const Wrapper = props => {
     },
     renderNode: {
       [BLOCKS.HEADING_2]: (node, children) => (
-        <h2 style={{ fontSize: 59 }}>{children}</h2>
+        <h2 style={{ fontSize: 55 }}>{children}</h2>
       ),
       [INLINES.ENTRY_HYPERLINK]: node => {
         const { contentful_id } = node.data.target.sys
@@ -108,7 +108,7 @@ const Wrapper = props => {
     header = (
       <>
         <Header>
-          <Grid alignY="center" style={`height: 100%`}>
+          <Grid alignY="center" style={`height: 100%;`}>
             <Box cols={[12, 12, 8, 5]}>
               {documentToReactComponents(data.homepage.cta.json, ctaOptions)}
             </Box>
@@ -136,7 +136,7 @@ const Wrapper = props => {
       />
       <header>
         <Grid>
-          <Box cols={[12, 12, 5, 3]}>
+          <Box cols={[12, 12, 3, 3]}>
             <Link to="/">
               <Img fixed={data.logo.childImageSharp.fixed} />
             </Link>
@@ -152,7 +152,7 @@ const Wrapper = props => {
               />
             </Menu>
           </Box>
-          <Box cols={[12, 12, 7, 6]}>
+          <Box cols={[12, 12, 9, 6]}>
             <NavDesktopContainer>
               <NavItems />
             </NavDesktopContainer>
