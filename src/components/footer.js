@@ -35,16 +35,11 @@ const Wrapper = props => {
           <Box cols={[12, 12, 3]}>
             <h3>Our Business Office</h3>
             <p>Melbourne, VIC 3000</p>
-            <p>
-              <a href="tel:(03) 9005 7154">(03) 9005 7154</a>
-            </p>
             <p>info@cedricdesigns.com.au</p>
           </Box>
           <Box cols={[12, 12, 3]}>
             <h3>Business Hours</h3>
-            <p>Saturday:9am to 5pm</p>
-            <p>Weekdays:9am to 8pm</p>
-            <p>Sunday:Closed</p>
+            <p>Everyday 24/7</p>
           </Box>
           <Box cols={[12, 12, 3]}>
             <Social>
