@@ -208,7 +208,7 @@ const Header = styled.div`
   span {
     color: ${props => props.theme.colors.accent};
   }
-  margin-top: 30px;
+  margin-top: 60px;
 
   strong {
     color: ${props => props.theme.colors.accent};
