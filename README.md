@@ -1,7 +1,7 @@
 # Project setup
 
 ## Start development project
-Command to run: `env-cmd -f .env.development gatsby develop`
+Command to run: `env-cmd -f .env gatsby develop`
 
 ## Set env variables
 
