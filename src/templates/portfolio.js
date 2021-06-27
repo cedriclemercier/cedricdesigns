@@ -80,6 +80,9 @@ const Page = props => {
       [BLOCKS.HEADING_2]: (node, children) => {
         return <h2 id={createAnchor(children)}>{children}</h2>
       },
+      [BLOCKS.HEADING_3]: (node, children) => {
+        return <h3 id={createAnchor(children)}>{children}</h3>
+      },
     },
   }
 
