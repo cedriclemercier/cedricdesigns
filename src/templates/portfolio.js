@@ -53,7 +53,7 @@ export const query = graphql`
 
 const createAnchor = text => {
   // TODO REMOVE ALL REMAINING SPECIAL CHARACTERS
-  return text.toString().toLowerCase().replace(/\-/g, "").replace(/\s+/g, "-")
+  return text.toString().toLowerCase().replace(/-/g, "").replace(/\s+/g, "-")
 }
 
 const Page = props => {
@@ -88,6 +88,9 @@ const Page = props => {
 
   const anchorOptions = {
     renderNode: {
+      [BLOCKS.HEADING_1]: (node, children) => {
+        return null;
+      },
       [BLOCKS.HEADING_2]: (node, children) => {
         return (
           <li>

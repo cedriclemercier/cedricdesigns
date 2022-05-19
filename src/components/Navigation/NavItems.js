@@ -1,5 +1,6 @@
+// The implementation of Subnav is uncomplete at the moment
+
 import React from "react"
-import { Link } from "gatsby"
 import styled from "styled-components"
 import { device } from "../../styles/theme"
 
@@ -20,36 +21,36 @@ const NavItems = styled.ul`
   }
 `
 
-const SubNav = styled.div`
-  position: absolute;
-  background-color: ${props => props.theme.colors.purple};
-  border: 2px solid #fff;
-  color: #fff;
-  font-size: 15px;
-  top: 45px;
-  z-index: 15;
+// const SubNav = styled.div`
+//   position: absolute;
+//   background-color: ${props => props.theme.colors.purple};
+//   border: 2px solid #fff;
+//   color: #fff;
+//   font-size: 15px;
+//   top: 45px;
+//   z-index: 15;
 
-  ul {
-    margin: 0;
-  }
+//   ul {
+//     margin: 0;
+//   }
 
-  li {
-    list-style: none;
-    min-width: 160px;
-  }
-`
+//   li {
+//     list-style: none;
+//     min-width: 160px;
+//   }
+// `
 
-const SubLink = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-  width: 100%;
-  display: block;
-  padding: 10px 20px;
+// const SubLink = styled(Link)`
+//   color: #fff;
+//   text-decoration: none;
+//   width: 100%;
+//   display: block;
+//   padding: 10px 20px;
 
-  :hover {
-    background-color: ${props => props.theme.colors.lightpurple};
-  }
-`
+//   :hover {
+//     background-color: ${props => props.theme.colors.lightpurple};
+//   }
+// `
 
 const Component = props => {
   return (
@@ -57,21 +58,6 @@ const Component = props => {
       <NavItem to="/" title="Home" />
       <NavItem to="/about" title="About" />
       <NavItem to="/services" title="Services" />
-      <NavItem hasSubnav to="/other-services" title="Other Services">
-        <SubNav>
-          <ul>
-            <li>
-              <SubLink to="/ui-design">UI Design</SubLink>
-            </li>
-            <li>
-              <SubLink to="/videos">Video Ads</SubLink>
-            </li>
-            <li>
-              <SubLink to="/branding">Branding</SubLink>
-            </li>
-          </ul>
-        </SubNav>
-      </NavItem>
       <NavItem to="/portfolio" title="Portfolio" />
       <NavItem to="/contact" title="Contact" />
     </NavItems>

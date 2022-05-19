@@ -10,7 +10,11 @@ const Sidebar = styled.div`
   right: 0;
   z-index: 1;
   background-color: red; /* For browsers that do not support gradients */
-  background-image: linear-gradient(45deg, #1C0148, #080027); /* Standard syntax (must be last) */
+  background-image: linear-gradient(
+    45deg,
+    #1c0148,
+    #080027
+  ); /* Standard syntax (must be last) */
   padding-top: 100px;
   padding-left: 16px;
   padding-right: 16px;
@@ -30,17 +34,18 @@ const Component = props => {
   return (
     <Sidebar open={props.open}>
       <div style={{ textAlign: "right" }}>
+        {" "}
         {/* <IoIosClose
-          style={{
-            fontSize: 36,
-            cursor: "pointer",
-            textAlign: "right",
-          }}
-        /> */}
-      </div>
+                      style={{
+                        fontSize: 36,
+                        cursor: "pointer",
+                        textAlign: "right",
+                      }}
+                    /> */}{" "}
+      </div>{" "}
       <nav>
         <NavItems />
-      </nav>
+      </nav>{" "}
     </Sidebar>
   )
 }

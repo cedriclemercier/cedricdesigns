@@ -102,7 +102,6 @@ const Wrapper = props => {
                 ))}
               </div>
             </ProjectComponents>
-            <h4>Typography</h4>
           </PortfolioDescription>
         </Box>
       </Grid>
